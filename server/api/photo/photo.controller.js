@@ -14,17 +14,50 @@ var nodemailer = require('nodemailer');
 
 
 // // Get list of things
-exports.index = function(req, res) {
+exports.sendEmail = function(req, res) {
   console.log('hit!');
-//  sendEmail('devonstownsend@gmail.com');
+  sendEmail('devonstownsend@gmail.com');
   return res.send(200);
 };
 
 
 exports.received = function(req, res) {
-  console.log('hit!');
-  sendEmail('devonstownsend@gmail.com', true);
-  return res.send(200);
+  console.log('your email was received!');
+  // sendReceived();
+  return res.sendFile('stealth.png');
+};
+
+
+function sendReceived() {
+    // create reusable transporter object using SMTP transport
+  var transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+          user: 'dtown69meat@gmail.com',
+          pass: 'mysosickpass'
+      }
+  });
+
+  // NB! No need to recreate the transporter object. You can use
+  // the same transporter object for all e-mails
+
+  // setup e-mail data with unicode symbols
+  var mailOptions = {
+      from: 'Devon <devonstownsend@gmail.com>', // sender address
+      to: 'devonstownsend@gmail.com',  
+      subject: 'Your email was finally opened', // Subject line
+      text: 'They opened your email just now' // plaintext body
+  };
+
+  // send mail with defined transport object
+  transporter.sendMail(mailOptions, function(error, info){
+      if(error){
+          console.log(error);
+      }else{
+          console.log('Message sent: ' + info.response);
+      }
+  });
+
 };
 
 
@@ -46,10 +79,10 @@ function sendEmail(email) {
   var mailOptions = {
       from: 'Devon <devonstownsend@gmail.com>', // sender address
       to: email,  // list of receivers
-      subject: 'You were added to a CollegeBand!', // Subject line
-      text: 'Hey,<br><br>You were added to this band: http://collegebandz.com/band/ <br><br>Best,<br>Devon Townsend', // plaintext body
+      subject: 'Catching up!', // Subject line
+      text: 'Hey, give me a call when you can.', // plaintext body
       html: 'Hey,<br><br>Just want to catch up and see how youre doing.  <br><br>Best,<br>Devon Townsend'+
-            '<img src="http://ec2-52-11-35-195.us-west-2.compute.amazonaws.com:9000/api/photos"></img>'
+            '<img src="http://ec2-52-11-35-195.us-west-2.compute.amazonaws.com:9000/api/photos/gotcha"></img>'
   };
 
   // send mail with defined transport object
@@ -61,7 +94,7 @@ function sendEmail(email) {
       }
   });
 
-}
+};
 
 
 
