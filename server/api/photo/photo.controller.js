@@ -16,7 +16,7 @@ var _ = require('lodash');
 // // Get list of things
 exports.index = function(req, res) {
   console.log('hit!');
-  return res.json(200, things);
+  return res.send(200);
 };
 
 
