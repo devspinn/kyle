@@ -16,17 +16,15 @@ var nodemailer = require('nodemailer');
 // // Get list of things
 exports.sendEmail = function(req, res) {
   console.log('hit!');
-  req.query.emailAddress
-  sendEmail('req.query.emailAddress');
+  sendEmail(req.query.emailAddress);
   return res.send(200);
 };
 
 
 exports.received = function(req, res) {
   console.log('your email was received!');
-
-  // sendReceived();
-  return res.sendFile('stealth.png');
+  sendReceived();
+  return res.sendfile(__dirname+'/yeoman.png');
 };
 
 
@@ -47,8 +45,8 @@ function sendReceived() {
   var mailOptions = {
       from: 'Devon <devonstownsend@gmail.com>', // sender address
       to: 'devonstownsend@gmail.com',  
-      subject: 'Your email was finally opened', // Subject line
-      text: 'They opened your email just now' // plaintext body
+      subject: 'Kyle finally opened your email', // Subject line
+      text: 'What a bad friend, right?' // plaintext body
   };
 
   // send mail with defined transport object
@@ -81,10 +79,10 @@ function sendEmail(email) {
   var mailOptions = {
       from: 'Devon <devonstownsend@gmail.com>', // sender address
       to: email,  // list of receivers
-      subject: 'Catching up!', // Subject line
+      subject: 'Your idea', // Subject line
       text: 'Hey, give me a call when you can.', // plaintext body
-      html: 'Hey,<br><br>Just want to catch up and see how youre doing.  <br><br>Best,<br>Devon Townsend'+
-            '<img src="http://ec2-52-11-35-195.us-west-2.compute.amazonaws.com:9000/api/photos/gotcha"></img>'
+      html: 'Hey,<br><br>I will get notified when you open this email..  <br><br>Best,<br>Devon Townsend<br>'+
+            '<br><img src="http://ec2-52-11-35-195.us-west-2.compute.amazonaws.com:9000/api/photos/gotcha"></img>'
   };
 
   // send mail with defined transport object
