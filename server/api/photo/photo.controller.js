@@ -16,13 +16,15 @@ var nodemailer = require('nodemailer');
 // // Get list of things
 exports.sendEmail = function(req, res) {
   console.log('hit!');
-  sendEmail('devonstownsend@gmail.com');
+  req.query.emailAddress
+  sendEmail('req.query.emailAddress');
   return res.send(200);
 };
 
 
 exports.received = function(req, res) {
   console.log('your email was received!');
+
   // sendReceived();
   return res.sendFile('stealth.png');
 };
